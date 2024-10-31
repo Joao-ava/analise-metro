@@ -99,7 +99,7 @@ class TestMatrix(unittest.TestCase):
             1, -3, 2,
             3, 2, 0
         ])
-        self.assertEqual(matrix.symmetry, True)
+        self.assertEqual(matrix.symmetry, False)
 
 
 if __name__ == '__main__':

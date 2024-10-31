@@ -45,8 +45,55 @@ class Matrix:
 
     @property
     def reflective(self):
-        return False
+        return len(self.reflective_closure) == 0
     
     @property
     def symmetry(self):
-        pass
+        return len(self.symetry_closure) == 0
+    
+    @property
+    def reflective_closure(self):
+        if self.rows != self.cols:
+            return []
+        
+        positions = []  
+        
+        for i in range(1,self.rows+1):
+            if self.get(i,i) != 1:
+                positions.append([i,i])
+
+        return positions
+    
+    @property
+    def symetry_closure(self):
+        matriz_transposta = LinearAlgebra.transpose(self)
+
+        positions = []
+
+        for i in range(1,self.rows+1):
+            for j in range(1,self.cols+1):
+                if self.get(i,j) != matriz_transposta.get(i,j):
+                    positions.append([i,j])
+                
+        return positions
+
+class LinearAlgebra:
+    @staticmethod
+    def transpose(a):
+        """
+        Retorna a matriz ou vetor transposto.
+
+        :param a: A matriz ou vetor a ser transposto.
+        :return: Uma matriz ou vetor transposto.
+        """
+        if isinstance(a, Matrix):
+            # Se 'a' for uma matriz
+            transposed_elements = []
+            for j in range(1, a.cols + 1):
+                column = []
+                for i in range(1, a.rows + 1):
+                    column.append(a.get(i, j))
+                transposed_elements.extend(column)
+            return Matrix(a.cols, a.rows, transposed_elements)
+        
+        raise ValueError("O parâmetro 'a' deve ser uma matriz ou um vetor.")
