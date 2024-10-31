@@ -46,3 +46,7 @@ class Matrix:
     @property
     def reflective(self):
         return False
+    
+    @property
+    def symmetry(self):
+        pass
