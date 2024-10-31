@@ -58,3 +58,35 @@ class TestMatrix(unittest.TestCase):
         self.assertEqual(matrix.get(1, 1), 1)
         matrix.set(1, 1, 2)
         self.assertEqual(matrix.get(1, 1), 2)
+
+    def test_diagonal(self):
+        matrix = Matrix(2, 3, [
+            1, 0, 0,
+            2, 1, 0
+        ])
+        self.assertEqual(matrix.reflective, False)
+
+        matrix = Matrix(2, 3, [
+            1, 0, 0,
+            2, 1, 0,
+            3, 2, 1
+        ])
+        self.assertEqual(matrix.reflective, True)
+
+        matrix = Matrix(2, 3, [
+            1, 0, 0,
+            2, 0, 0,
+            3, 2, 1
+        ])
+        self.assertEqual(matrix.reflective, False)
+
+        matrix = Matrix(2, 3, [
+            0, 1, 1,
+            2, 0, 1,
+            3, 2, 0
+        ])
+        self.assertEqual(matrix.reflective, False)
+
+
+if __name__ == '__main__':
+    unittest.main()

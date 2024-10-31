@@ -42,3 +42,7 @@ class Matrix:
 
         content += ('-' * max_elements_size * self.cols) + '---' * self.cols
         return content
+
+    @property
+    def reflective(self):
+        return False
