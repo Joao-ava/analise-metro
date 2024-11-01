@@ -76,6 +76,28 @@ class Matrix:
                     positions.append([i,j])
                 
         return positions
+    
+    @property
+    def asymmetric(self):
+        if self.rows != self.cols:
+            return False
+
+        for i in range(1, self.rows + 1):
+            for j in range(1, self.cols + 1):
+                if i != j and self.get(i, j) != -self.get(j, i):
+                    return False
+        return True
+    
+    @property
+    def antisymmetric(self):
+        if self.rows != self.cols:
+            return False
+
+        for i in range(1, self.rows + 1):
+            for j in range(i + 1, self.cols + 1):
+                if self.get(i, j) != -self.get(j, i):
+                    return False
+        return True
 
 class LinearAlgebra:
     @staticmethod

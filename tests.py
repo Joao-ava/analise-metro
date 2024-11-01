@@ -101,6 +101,36 @@ class TestMatrix(unittest.TestCase):
         ])
         self.assertEqual(matrix.symmetry, False)
 
+    def test_asymmetric(self):
+        matrix = Matrix(3, 3, [
+            0, 2, -2,
+            -2, 0, 3,
+            2, -3, 0
+        ])
+        self.assertTrue(matrix.asymmetric)
+
+        matrix = Matrix(3, 3, [
+            0, 2, 1,
+            -2, 0, 3,
+            -1, -3, 0
+        ])
+        self.assertFalse(matrix.asymmetric)
+
+    def test_antisymmetric(self):
+        matrix = Matrix(3, 3, [
+            0, 2, -2,
+            -2, 0, 3,
+            2, -3, 0
+        ])
+        self.assertTrue(matrix.antisymmetric)
+
+        matrix = Matrix(3, 3, [
+            0, 2, -1,
+            -2, 0, 3,
+            1, -3, 0
+        ])
+        self.assertFalse(matrix.antisymmetric)
+        
 
 if __name__ == '__main__':
     unittest.main()
