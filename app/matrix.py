@@ -83,6 +83,8 @@ class Matrix:
             return False
 
         for i in range(1, self.rows + 1):
+            if self.get(i, i) != 0:
+                return False
             for j in range(1, self.cols + 1):
                 if i != j and self.get(i, j) != -self.get(j, i):
                     return False
@@ -98,6 +100,32 @@ class Matrix:
                 if self.get(i, j) != -self.get(j, i):
                     return False
         return True
+    
+    @property
+    def asymmetric_closure(self):
+        
+        if self.rows != self.cols:
+            return []
+
+        positions = []
+        for i in range(1, self.rows + 1):
+            for j in range(1, self.cols + 1):
+                if i != j and self.get(i, j) == self.get(j, i):
+                    positions.append([i, j])
+
+        return positions
+    
+    def antisymmetric_closure(self):
+        if self.rows != self.cols:
+            return []
+
+        positions = []
+        for i in range(1, self.rows + 1):
+            for j in range(i + 1, self.cols + 1):
+                if self.get(i, j) != -self.get(j, i) and not (self.get(i, j) == 0 and self.get(j, i) == 0):
+                    positions.append([i, j])
+
+        return positions
 
 class LinearAlgebra:
     @staticmethod

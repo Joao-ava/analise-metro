@@ -16,14 +16,29 @@ matriz = Matrix(6,6,[
 
 #print(matriz.reflective_closure)
 
-print(matriz.symetry_closure)
+#print(matriz.symetry_closure)
 
 matriz2 = Matrix(3, 3, [
-    0, 2, -2,
-    -2, 0, 3,
-    2, -3, 0
+    0, 1, 1,
+    -1, 0, 0,
+    0, 0, 0
 ])
 
-#print(matriz2.asymmetric)      
+print("f ou t: ", matriz2.asymmetric)      
+print("f ou t: ", matriz2.antisymmetric) 
+print("linha, coluna: ", matriz2.asymmetric_closure)  
+print("linha, coluna: ", matriz2.antisymmetric_closure())
 
-#print(matriz2.antisymmetric) 
+print("-" * 20)
+
+# Definindo outra matriz
+matriz3 = Matrix(3, 3, [
+    0, 1, -1,
+    -1, 0, 0,
+    1, 0, 0
+])
+
+print(matriz3.asymmetric)      
+print(matriz3.antisymmetric) 
+print(matriz3.asymmetric_closure)
+print(matriz3.antisymmetric_closure()) 
