@@ -126,6 +126,41 @@ class Matrix:
                     positions.append([i, j])
 
         return positions
+    @property
+    def maximal_elements(self):
+        maximals = []
+        for i in range(1, self.rows + 1):
+            for j in range(1, self.cols + 1):
+                is_maximal = True
+                for k in range(1, self.rows + 1):
+                    if self.get(k, j) > self.get(i, j):
+                        is_maximal = False
+                        break
+                for k in range(1, self.cols + 1):
+                    if self.get(i, k) > self.get(i, j):
+                        is_maximal = False
+                        break
+                if is_maximal:
+                    maximals.append((i, j))  
+        return maximals
+
+    @property
+    def minimal_elements(self):
+        minimals = []
+        for i in range(1, self.rows + 1):
+            for j in range(1, self.cols + 1):
+                is_minimal = True
+                for k in range(1, self.rows + 1):
+                    if self.get(k, j) < self.get(i, j):
+                        is_minimal = False
+                        break
+                for k in range(1, self.cols + 1):
+                    if self.get(i, k) < self.get(i, j):
+                        is_minimal = False
+                        break
+                if is_minimal:
+                    minimals.append((i, j))  
+        return minimals
 
 class LinearAlgebra:
     @staticmethod
