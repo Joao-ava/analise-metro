@@ -171,6 +171,32 @@ class Matrix:
         return positions
     
     @property
+    def max(self):
+        cols = []
+        for j in range(1, self.cols + 1):
+            is_valid = True
+            for i in range(1, self.rows + 1):
+                if self.get(i, j) == 0:
+                    is_valid = False
+
+            if is_valid:
+                cols.append(j)
+        return cols
+    
+    @property
+    def min(self):
+        rows = []
+        for i in range(1, self.rows + 1):
+            is_valid = True
+            for j in range(1, self.cols + 1):
+                if self.get(i, j) == 0:
+                    is_valid = False
+
+            if is_valid:
+                rows.append(i)
+        return rows
+    
+    @property
     def total_order(self):
         positions = []
         for i in range(1, self.rows + 1):
