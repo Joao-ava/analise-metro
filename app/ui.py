@@ -148,7 +148,7 @@ def create_header(
 
     order_label = ttk.Label(
         frame_header,
-        text="✅ É de " + matriz.order if matriz.order else "❌ Não é de ordem",
+        text="✅ É de ordem" if matriz.order else "❌ Não é de ordem",
         anchor="w",
         width=20
     )
