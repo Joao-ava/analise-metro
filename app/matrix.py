@@ -181,11 +181,12 @@ class Matrix:
                 if self.get(i, j) != 1 and self.get(j, i) != 1:
                     positions.append([i, j])
 
+    @property
     def order(self):
         """
         return if Relation is order
         """
-        if self.reflective and self.antisymetric and self.transitive:
+        if self.reflective and self.antisymmetric and self.transitive:
             closure = self.total_order
             if len(closure) == 0:
                 print("Ordem Total")
@@ -195,6 +196,7 @@ class Matrix:
         else:
             return False
 
+    @property
     def equivalence(self):
         """
         return if Relation is equivalence
