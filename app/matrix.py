@@ -212,14 +212,13 @@ class Matrix:
 
     @property
     def order(self):
-        """
-        return if Relation is order
-        """
         if self.reflective and self.antisymmetric and self.transitive:
-            closure = self.total_order
-            if len(closure) == 0:
-                return "ordem Total"
-            return "ordem Parcial"
+            if self.total_order:
+                print("Ordem Total")
+                return True
+            else:
+                print("Ordem Parcial")
+                return False
         else:
             return False
 
