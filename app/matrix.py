@@ -97,8 +97,8 @@ class Matrix:
             if self.get(i, i) != 0:
                 positions.append([i, i])
             for j in range(1, self.cols + 1):
-                if i != j and self.get(i, j) == self.get(j, i):
-                    positions.append([i, j])
+                if i != j and self.get(i, j) == 1 and self.get(i, j) == self.get(j, i):
+                    positions.append([j, i])
 
         return positions
     
@@ -110,44 +110,41 @@ class Matrix:
         positions = []
         for i in range(1, self.rows + 1):
             for j in range(i + 1, self.cols + 1):
-                if i != j and self.get(i, j) == self.get(j, i):
-                    positions.append([i, j])
+                if i != j and self.get(i, j) == 1 and self.get(i, j) == self.get(j, i):
+                    positions.append([j, i])
 
         return positions
+
     @property
     def maximal_elements(self):
+        if not self.order:
+            return []
         maximals = []
         for i in range(1, self.rows + 1):
+            is_maximal = True
             for j in range(1, self.cols + 1):
-                is_maximal = True
-                for k in range(1, self.rows + 1):
-                    if self.get(k, j) > self.get(i, j):
-                        is_maximal = False
-                        break
-                for k in range(1, self.cols + 1):
-                    if self.get(i, k) > self.get(i, j):
-                        is_maximal = False
-                        break
-                if is_maximal:
-                    maximals.append((i, j))  
+                if i != j and self.get(i, j) != 0:
+                    is_maximal = False
+
+            if is_maximal:
+                maximals.append(i)
+
         return maximals
 
     @property
     def minimal_elements(self):
+        if not self.order:
+            return []
         minimals = []
-        for i in range(1, self.rows + 1):
-            for j in range(1, self.cols + 1):
-                is_minimal = True
-                for k in range(1, self.rows + 1):
-                    if self.get(k, j) < self.get(i, j):
-                        is_minimal = False
-                        break
-                for k in range(1, self.cols + 1):
-                    if self.get(i, k) < self.get(i, j):
-                        is_minimal = False
-                        break
-                if is_minimal:
-                    minimals.append((i, j))  
+        for j in range(1, self.cols + 1):
+            is_minimal = True
+            for i in range(1, self.rows + 1):
+                if i != j and self.get(i, j) != 0:
+                    is_minimal = False
+
+            if is_minimal:
+                minimals.append(j)
+
         return minimals
 
     @property
@@ -181,20 +178,20 @@ class Matrix:
                 if self.get(i, j) != 1 and self.get(j, i) != 1:
                     positions.append([i, j])
 
+    @property
     def order(self):
         """
         return if Relation is order
         """
-        if self.reflective and self.antisymetric and self.transitive:
+        if self.reflective and self.antisymmetric and self.transitive:
             closure = self.total_order
             if len(closure) == 0:
-                print("Ordem Total")
-            else:
-                print("Ordem Parcial")
-            return True
+                return "ordem Total"
+            return "ordem Parcial"
         else:
             return False
 
+    @property
     def equivalence(self):
         """
         return if Relation is equivalence
