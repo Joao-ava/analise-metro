@@ -24,10 +24,11 @@ matriz2 = Matrix(3, 3, [
     0, 0, 0
 ])
 
+print(matriz2)
 print("f ou t: ", matriz2.asymmetric)      
 print("f ou t: ", matriz2.antisymmetric) 
 print("linha, coluna: ", matriz2.asymmetric_closure)  
-print("linha, coluna: ", matriz2.antisymmetric_closure())
+print("linha, coluna: ", matriz2.antisymmetric_closure)
 
 print("-" * 20)
 
@@ -38,7 +39,8 @@ matriz3 = Matrix(3, 3, [
     1, 0, 0
 ])
 
+print(matriz3)
 print(matriz3.asymmetric)      
 print(matriz3.antisymmetric) 
 print(matriz3.asymmetric_closure)
-print(matriz3.antisymmetric_closure()) 
+print(matriz3.antisymmetric_closure) 

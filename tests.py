@@ -59,7 +59,7 @@ class TestMatrix(unittest.TestCase):
         matrix.set(1, 1, 2)
         self.assertEqual(matrix.get(1, 1), 2)
 
-    def test_diagonal(self):
+    def test_reflective(self):
         matrix = Matrix(2, 3, [
             1, 0, 0,
             2, 1, 0
@@ -110,7 +110,7 @@ class TestMatrix(unittest.TestCase):
         self.assertTrue(matrix.asymmetric)
 
         matrix = Matrix(3, 3, [
-            0, 2, 1,
+            1, 2, 1,
             -2, 0, 3,
             -1, -3, 0
         ])
@@ -127,9 +127,16 @@ class TestMatrix(unittest.TestCase):
         matrix = Matrix(3, 3, [
             0, 2, -1,
             -2, 0, 3,
-            1, -3, 0
+            1, 3, 0
         ])
         self.assertFalse(matrix.antisymmetric)
+
+        matrix = Matrix(3, 3, [
+            1, 2, -1,
+            -2, 0, 3,
+            1, -3, 0
+        ])
+        self.assertTrue(matrix.antisymmetric)
         
 
 if __name__ == '__main__':

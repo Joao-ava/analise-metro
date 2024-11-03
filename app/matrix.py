@@ -45,6 +45,8 @@ class Matrix:
 
     @property
     def reflective(self):
+        if self.rows != self.cols:
+            return False
         return len(self.reflective_closure) == 0
     
     @property
@@ -52,10 +54,7 @@ class Matrix:
         return len(self.symetry_closure) == 0
     
     @property
-    def reflective_closure(self):
-        if self.rows != self.cols:
-            return []
-        
+    def reflective_closure(self):        
         positions = []  
         
         for i in range(1,self.rows+1):
@@ -82,39 +81,28 @@ class Matrix:
         if self.rows != self.cols:
             return False
 
-        for i in range(1, self.rows + 1):
-            if self.get(i, i) != 0:
-                return False
-            for j in range(1, self.cols + 1):
-                if i != j and self.get(i, j) != -self.get(j, i):
-                    return False
-        return True
+        return len(self.asymmetric_closure) == 0
     
     @property
     def antisymmetric(self):
         if self.rows != self.cols:
             return False
 
-        for i in range(1, self.rows + 1):
-            for j in range(i + 1, self.cols + 1):
-                if self.get(i, j) != -self.get(j, i):
-                    return False
-        return True
+        return len(self.antisymmetric_closure) == 0
     
     @property
     def asymmetric_closure(self):
-        
-        if self.rows != self.cols:
-            return []
-
         positions = []
         for i in range(1, self.rows + 1):
+            if self.get(i, i) != 0:
+                positions.append([i, i])
             for j in range(1, self.cols + 1):
                 if i != j and self.get(i, j) == self.get(j, i):
                     positions.append([i, j])
 
         return positions
     
+    @property
     def antisymmetric_closure(self):
         if self.rows != self.cols:
             return []
@@ -122,7 +110,7 @@ class Matrix:
         positions = []
         for i in range(1, self.rows + 1):
             for j in range(i + 1, self.cols + 1):
-                if self.get(i, j) != -self.get(j, i) and not (self.get(i, j) == 0 and self.get(j, i) == 0):
+                if i != j and self.get(i, j) == self.get(j, i):
                     positions.append([i, j])
 
         return positions
