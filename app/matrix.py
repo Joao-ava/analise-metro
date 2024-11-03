@@ -162,6 +162,62 @@ class Matrix:
                     minimals.append((i, j))  
         return minimals
 
+    @property
+    def transitive(self):
+        return (self.transitive_closure == [])
+
+    @property
+    def transitive_closure(self):
+        """
+        Retorna o fecho transitivo da matriz.
+        """
+
+        if self.rows != self.cols:
+            return []
+
+        positions = []
+        for i in range(1, self.rows + 1):
+            for j in range(1, self.cols + 1):
+                if self.get(i, j) == 1:
+                    for k in range(1, self.cols + 1):
+                        if self.get(j, k) == 1 and self.get(i, k) != 1:
+                            positions.append([i, k])
+
+        return positions
+    
+    @property
+    def total_order(self):
+        positions = []
+        for i in range(1, self.rows + 1):
+            for j in range(1, self.cols + 1):
+                if self.get(i, j) != 1 and self.get(j, i) != 1:
+                    positions.append([i, j])
+
+    def order(self):
+        """
+        return if Relation is order
+        """
+        if self.reflective and self.antisymetric and self.transitive:
+            closure = self.total_order
+            if len(closure) == 0:
+                print("Ordem Total")
+            else:
+                print("Ordem Parcial")
+            return True
+        else:
+            return False
+
+    def equivalence(self):
+        """
+        return if Relation is equivalence
+        """
+        if self.reflective and self.symmetry and self.transitive:
+            print("Equivalência")
+            return True
+        else:
+            return False
+
+
 class LinearAlgebra:
     @staticmethod
     def transpose(a):
