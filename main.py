@@ -38,6 +38,8 @@ matriz3 = Matrix(3, 3, [
     1, 0, 0
 ])
 
+print("Maximais:", matriz3.maximal_elements)      
+print("Minimais:", matriz3.minimal_elements)
 print(matriz3.asymmetric)      
 print(matriz3.antisymmetric) 
 print(matriz3.asymmetric_closure)
