@@ -172,6 +172,9 @@ class Matrix:
     
     @property
     def max(self):
+        if not self.maximal_elements:
+            return []
+
         cols = []
         for j in range(1, self.cols + 1):
             is_valid = True
@@ -185,6 +188,9 @@ class Matrix:
     
     @property
     def min(self):
+        if not self.minimal_elements:
+            return []
+
         rows = []
         for i in range(1, self.rows + 1):
             is_valid = True
@@ -249,3 +255,30 @@ class LinearAlgebra:
             return Matrix(a.cols, a.rows, transposed_elements)
         
         raise ValueError("O parâmetro 'a' deve ser uma matriz ou um vetor.")
+    
+    @staticmethod
+    def dot(A: Matrix, B: Matrix):
+        """
+        Multiplica duas matrizes.
+        Considerando A(m.n) e B(n.p), e C(m.p)
+        
+        :param a: A matriz a ser multiplicada.
+        :param b: A matriz a ser multiplicada.
+        :return: Uma matriz resultante da multiplicação.
+        """
+        #Confere validade da multiplicação
+        if A.cols != B.rows:
+            raise Exception("Não é possível multiplicar as matrizes AxB! \
+                \nA quantidade de colunas em A: (", A.cols, ") é diferente da quantidade de linhas em B: (", B.rows, ")")
+        C = Matrix(A.rows, B.cols, ([0] * A.rows *B.cols)) # Cria uma matriz nula
+
+        # Faz o somatório
+        for i in range(1, C.rows+1): #start in 1
+            for k in range(1, C.cols+1): #start in 1
+                for j in range(A.cols):
+                    summation = C.get(i, k) + A.get(i, j) * B.get(j, k)
+                    # matriz de relação vai no maximo até 1
+                    if summation > 1:
+                        summation = 1
+                    C.set(i, k, summation)
+        return C
